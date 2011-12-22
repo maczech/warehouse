@@ -100,9 +100,30 @@ class ProductOrderSpec extends UnitSpec {
 		assert newCompanyOrder.quantity==2.0
 		
 		where:
-		orderItem = new OrderItem(name:"węgiel", price:new Price(1.0), itemCount:2);
+		orderItem = new OrderItem(name:"węgiel", price:new Price(1.0), amount:2);
 		address=new Address(street:"topolowa",city:"radziechowy",houseNumber:57);
 		company = new Company(name:"mtm", address:address);
+		
+	}
+	
+	def "should be two orders after add"(){
+		setup:
+		mockDomain(ProductOrder)
+		ProductOrder order = new ProductOrder()
+		
+		when:
+		order.addItem(coalProduct);
+		order.addItem(coalProduct2);
+		
+		then:
+		order.items.size()==2
+		
+		where:
+		coalProduct = new Product(name:"węgiel",price:new Price(100))
+		coalProduct2 = new Product(name:"węgiel2",price:new Price(150));
+		
+		
+			
 		
 	}
 
