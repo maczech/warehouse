@@ -6,11 +6,9 @@ class ProductOrder {
 	
 	
 	BigDecimal quantity=0.0;
-	def orderer;
-	def items=[]
-
+	
 	static hasMany = [items : OrderItem]
-    
+    static belongsTo = [orderer:Customer]
 	
 	def addItem={product,amount->
 		def item = new OrderItem()

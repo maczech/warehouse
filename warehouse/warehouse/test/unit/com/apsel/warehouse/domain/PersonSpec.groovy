@@ -155,4 +155,30 @@ class PersonSpec extends UnitSpec {
 		
 		
 	}
+	
+	def "should return orders by person"(){
+		setup:
+		mockDomain(Address);
+		mockDomain(ProductOrder)
+		mockDomain(Person)
+		mockDomain(Customer)
+		
+		when:"new person created"
+		def person = new Person(name:name,surname:surname, address:address).save(failOnError:true);
+		and:"new order for person created"
+		def order = new ProductOrder(orderer:person).save(failOnError:true);
+		
+		then:"get person by name"
+		def newPerson = Customer.get(person.id);
+		newPerson?.orders?.size()==1
+		def newOrder = ProductOrder.findByOrderer(newPerson);
+		
+		
+		
+		where:
+		name="marcin";
+		surname="czech";
+		address=new Address(street:"topolowa",city:"radziechowy",houseNumber:57);
+		
+	}
 }

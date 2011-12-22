@@ -1,11 +1,5 @@
 package com.apsel.warehouse.domain
 
-class Company {
-	String name;
-	Address address;
+class Company extends Customer{
 	
-    static constraints = {
-		name blank:false;
-		address nullable:false;
-    }
 }

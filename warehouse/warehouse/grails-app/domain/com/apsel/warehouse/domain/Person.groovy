@@ -1,13 +1,13 @@
 package com.apsel.warehouse.domain
 
-class Person{
-	String name;
+class Person extends Customer{
+	
 	String surname;
-	Address address;
+	
 	
     static constraints = {
-		name blank:false;
+		
 		surname blank:false;
-		address nullable:false;
+		
     }
 }
