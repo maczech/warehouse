@@ -93,11 +93,11 @@ class ProductOrderSpec extends UnitSpec {
 		companyOrder.save(failOnError:true)
 		
 		then:
-		assert companyOrder.quantity == 2.0;
+		companyOrder.quantity == 2.0;
 		and:"after restore"
 		def newCompanyOrder = ProductOrder.get(companyOrder.id);
-		assert newCompanyOrder
-		assert newCompanyOrder.quantity==2.0
+		newCompanyOrder!=null
+		newCompanyOrder.quantity==2.0
 		
 		where:
 		orderItem = new OrderItem(name:"węgiel", price:new Price(1.0), amount:2);
@@ -109,22 +109,18 @@ class ProductOrderSpec extends UnitSpec {
 	def "should be two orders after add"(){
 		setup:
 		mockDomain(ProductOrder)
+		mockDomain(Product)
 		ProductOrder order = new ProductOrder()
+		Product coalProduct = new Product(name:"węgiel",price:new Price(100))
+		Product coalProduct2 = new Product(name:"węgiel2",price:new Price(150));
 		
 		when:
-		order.addItem(coalProduct);
-		order.addItem(coalProduct2);
+		order.addItem(coalProduct,1);
+		order.addItem(coalProduct2,2);
 		
 		then:
 		order.items.size()==2
-		
-		where:
-		coalProduct = new Product(name:"węgiel",price:new Price(100))
-		coalProduct2 = new Product(name:"węgiel2",price:new Price(150));
-		
-		
-			
-		
+
 	}
 
 }

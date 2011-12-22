@@ -1,5 +1,7 @@
 package com.apsel.warehouse.domain
 
+import com.apsel.warehouse.vo.Price;
+
 class ProductOrder {
 	
 	
@@ -12,8 +14,12 @@ class ProductOrder {
 	
 	def addItem={product,amount->
 		def item = new OrderItem()
-		item.params = product.params
-		item.amount = amount
+
+		item.name  = product.name;
+		item.price = product.price;
+		item.amount = amount;
+		items+=item;
+
 	}
 	
 	
@@ -34,7 +40,7 @@ class ProductOrder {
 		def quantity=0.0;
 		
 		items.each { item->
-			quantity += (item.price.value * item.itemCount);	
+			quantity += (item.price.value * item.amount);	
 			
 		}
 		

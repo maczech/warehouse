@@ -12,7 +12,7 @@ class OrderItemSpec extends UnitSpec {
 		mockDomain(OrderItem);
 		
 		when:
-		new OrderItem(name:name, price:price, itemCount:count).save(failOnError:true);
+		new OrderItem(name:name, price:price, amount:count).save(failOnError:true);
 		
 		then:
 		OrderItem.list().size()==1;
@@ -26,7 +26,7 @@ class OrderItemSpec extends UnitSpec {
 	def "should be deleted"(){
 		setup:
 		mockDomain(OrderItem);
-		def orderItem = new OrderItem(name:name, price:price,itemCount:count).save(failOnError:true);
+		def orderItem = new OrderItem(name:name, price:price,amount:count).save(failOnError:true);
 		
 		when:
 		orderItem.delete();
@@ -45,7 +45,7 @@ class OrderItemSpec extends UnitSpec {
 	def "should be same name and id after modified"(){
 		setup:
 		mockDomain(OrderItem);
-		def orderItem = new OrderItem(name:name, price:price,itemCount:count).save(failOnError:true);
+		def orderItem = new OrderItem(name:name, price:price,amount:count).save(failOnError:true);
 		
 		when:
 		orderItem.name=newName;
@@ -102,7 +102,7 @@ class OrderItemSpec extends UnitSpec {
 		mockDomain(OrderItem)
 		
 		when:
-		new OrderItem(name:name,itemCount:count).save(failOnError:true);
+		new OrderItem(name:name,amount:count).save(failOnError:true);
 		
 		then:
 		def e = thrown(ValidationException)
@@ -135,7 +135,7 @@ class OrderItemSpec extends UnitSpec {
 		mockDomain(OrderItem);
 		
 		when:
-		new OrderItem(name:name, price:price,itemCount:count).save(failOnError:true);
+		new OrderItem(name:name, price:price,amount:count).save(failOnError:true);
 		
 		then:
 		def e = thrown(ValidationException)
