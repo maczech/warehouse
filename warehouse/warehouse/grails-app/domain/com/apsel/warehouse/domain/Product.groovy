@@ -10,4 +10,5 @@ class Product {
 		name blank:false;
 		price blank:false;
     }
+	static embedded = ['price'];
 }

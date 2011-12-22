@@ -8,7 +8,16 @@ class ProductOrder {
 	def items=[]
 
 	static hasMany = [items : OrderItem]
-    static constraints = {
+    
+	
+	def addItem={product,amount->
+		def item = new OrderItem()
+		item.params = product.params
+		item.amount = amount
+	}
+	
+	
+	static constraints = {
 		
     }
 	
